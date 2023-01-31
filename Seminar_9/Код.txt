@@ -1,0 +1,157 @@
+pip install python-telegram-bot==13.14 --- РЅСѓР¶РЅР°СЏ РІРµСЂСЃРёСЏ
+-------------------------------------------------------------------------
+РџРѕСЃР»Рµ СЌС‚РѕРіРѕ РЅСѓР¶РЅРѕ Р±СѓРґРµС‚ СЂР°СЃСЃРєР°Р·Р°С‚СЊ
+
+from telegram import Bot
+from telegram.ext import Updater, CommandHandler
+
+
+bot = Bot(token='5897211710:AAG0910uozqzP44r1OGkgyEzGf_fDBBTiQs')
+updater = Updater(token='5897211710:AAG0910uozqzP44r1OGkgyEzGf_fDBBTiQs')
+dispatcher = updater.dispatcher
+
+
+def start(update, context):
+    context.bot.send_message(update.effective_chat.id, 'Hello')
+
+
+start_handler = CommandHandler('start', start)
+dispatcher.add_handler(start_handler)
+
+
+updater.start_polling()
+updater.idle()
+
+-------------------------------------------------------------------------
+python anywhere --- РґР»СЏ СЂР°Р·РІРѕСЂР°С‡РёРІР°РЅРёСЏ СЃРІРѕРµРіРѕ СЃРµСЂРІРµСЂР°
+-------------------------------------------------------------------------
+from telegram import Bot, Update
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from random import randint as rd
+
+
+bot = Bot(token='5897211710:AAG0910uozqzP44r1OGkgyEzGf_fDBBTiQs')
+updater = Updater(token='5897211710:AAG0910uozqzP44r1OGkgyEzGf_fDBBTiQs')
+dispatcher = updater.dispatcher
+
+
+def start(update, context):
+    context.bot.send_message(update.effective_chat.id, 'Hello')
+
+
+def rand(update, context):
+    context.bot.send_message(update.effective_chat.id, f'{rd(1, 100)}')
+
+
+def voice(update, context):
+    context.bot.send_message(update.effective_chat.id, 'РЇ РїРѕРєР° С‚Р°РєРёС… РєРѕРјР°РЅРґ РЅРµ Р·РЅР°СЋ :(')
+
+
+start_handler = CommandHandler('start', start)
+random_handler = CommandHandler('random', rand)
+message_handler = MessageHandler(Filters.command, voice)
+
+dispatcher.add_handler(start_handler)
+dispatcher.add_handler(random_handler)
+dispatcher.add_handler(message_handler)
+
+
+updater.start_polling()
+updater.idle() # ctrl + c
+------------------------------------------------------------------------
+Р”РѕР±Р°РІРёРј СЂРµР°РіРёСЂРѕРІР°РЅРёРµ РЅР° РІРІРѕРґРёРјС‹Рµ СЃР»РѕРІР°
+------------------------------------------------------------------------
+from telegram import Bot, Update
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from random import randint as rd
+
+
+bot = Bot(token='5897211710:AAG0910uozqzP44r1OGkgyEzGf_fDBBTiQs')
+updater = Updater(token='5897211710:AAG0910uozqzP44r1OGkgyEzGf_fDBBTiQs')
+dispatcher = updater.dispatcher
+
+
+def start(update, context):
+    context.bot.send_message(update.effective_chat.id, 'Hello')
+
+
+def rand(update, context):
+    context.bot.send_message(update.effective_chat.id, f'{rd(1, 100)}')
+
+
+
+def voice(update, context):
+    text = update.message.text
+    if 'РїСЂРёРІ' in text.lower():
+        context.bot.send_message(update.effective_chat.id, 'Р С‚РµР±Рµ РїСЂРёРІРµС‚, РјРѕР№ РґРѕСЂРѕРіРѕР№ РґСЂСѓРі!')
+    else:
+        context.bot.send_message(update.effective_chat.id, 'РЇ С‚РµР±СЏ РЅРµ РїРѕРЅРёРјР°СЋ :(')
+
+
+start_handler = CommandHandler('start', start)
+random_handler = CommandHandler('random', rand)
+message_handler = MessageHandler(Filters.text, voice)
+
+dispatcher.add_handler(start_handler)
+dispatcher.add_handler(random_handler)
+dispatcher.add_handler(message_handler)
+
+
+updater.start_polling()
+updater.idle() 
+--------------------------------------------------------------------------------------------
+Р”РѕР±Р°РІРёРј РЅРµР±РѕР»СЊС€РѕР№ РґРёР°Р»РѕРі
+--------------------------------------------------------------------------------------------
+from telegram import Bot, Update
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, ConversationHandler
+from random import randint as rd
+
+
+bot = Bot(token='5897211710:AAG0910uozqzP44r1OGkgyEzGf_fDBBTiQs')
+updater = Updater(token='5897211710:AAG0910uozqzP44r1OGkgyEzGf_fDBBTiQs')
+dispatcher = updater.dispatcher
+
+
+A = 0
+B = 1
+
+
+def start(update, context):
+    context.bot.send_message(update.effective_chat.id, 'РџСЂРёРІРµС‚\nРљР°Рє С‚РІРѕРё РґРµР»Р°?')
+    return A
+
+
+def howareyou(update, context):
+    text = update.message.text
+    if 'С…РѕСЂ' in text.lower():
+        context.bot.send_message(update.effective_chat.id, 'РЇ СЂР°Рґ, С‡С‚Рѕ Сѓ С‚РµР±СЏ РІСЃРµ С…РѕСЂРѕС€Рѕ')
+    else:
+        context.bot.send_message(update.effective_chat.id, 'РќРµ РіСЂСѓСЃС‚Рё, РІСЃРµ Р±СѓРґРµС‚ РѕС‚Р»РёС‡РЅРѕ')
+    context.bot.send_message(update.effective_chat.id, 'РљР°Рє РїРѕРіРѕРґР°?')
+    return B
+
+def weather(update, context):
+    text = update.message.text
+    context.bot.send_message(update.effective_chat.id, 'РќСѓ РѕРє, Сѓ РјРµРЅСЏ С‚РѕР¶Рµ СЃРµРіРѕРґРЅСЏ С…РѕСЂРѕС€Р°СЏ РїРѕРіРѕРґР°')
+
+    return ConversationHandler.END
+
+
+def cancel(update, context):
+    context.bot.send_message(update.effective_chat.id, 'РџСЂРѕС‰Р°Р№!!!')
+
+
+start_handler = CommandHandler('start', start)
+howareyou_handler = MessageHandler(Filters.text, howareyou)
+weather_handler = MessageHandler(Filters.text, weather)
+cancel_handler = CommandHandler('cancel', cancel)
+# message_handler = MessageHandler(Filters.text, voice)
+conv_handler = ConversationHandler(entry_points=[start_handler],
+                                    states={A: [howareyou_handler],
+                                    B: [weather_handler]},
+                                    fallbacks=[cancel_handler])
+dispatcher.add_handler(conv_handler)
+
+updater.start_polling()
+updater.idle() 
+--------------------------------------------------------------------------------------------
